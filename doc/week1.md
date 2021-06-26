@@ -170,6 +170,30 @@ export default GridCards;
 - React의 일반적인 패턴은 컴포넌트가 여러개의 요소를 반환하는 것입니다. Fragments를 사용하면 DOM에 별도 노드를 추가하지 않고 자식 목록을 그룹화할 수 있습니다.
   [참고 링크](https://reactjs-kr.firebaseapp.com/docs/fragments.html#short-syntax)
 
+### 6강
+
+1. Load more 기능 추가
+
+- page를 useState로 관리한다.
+- 버튼 클릭시 현재 page + 1을 하는 방식으로 다음 페이지 정보를 불러온다.
+- 화면에서 새로운 페이지가 하단에 계속 추가되는 식으로 구성하기 위해 아래와 같은 코드로 새정보를 중첩시킨다.
+  ```js
+  setMovies([...Movies, ...response.results]);
+  ```
+
+### 7강
+
+1. 상세화면 개발
+
+- App.js > Route 추가
+  ```js
+  <Route exact path="/movie/:movieId" component={Auth(MovieDetail, false)} />
+  ```
+  > exact: 주어진 경로와 정확히 일치해야설정한 컴포넌트를 보여준다.
+- mainImage component 추가
+- movieInfo component 추가
+  - antd 를 활용하어 테이블식으로 정보화면 구성
+
 ### 8강
 
 1. 영화출연진들 가져오기 기능추가

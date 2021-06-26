@@ -1,46 +1,47 @@
-import React, { useState } from "react";
-import { withRouter } from "react-router-dom";
-import { loginUser } from "../../../_actions/user_actions";
-import { Formik } from "formik";
-import * as Yup from "yup";
-import { Form, Input, Button, Checkbox, Typography } from "antd";
-import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { useDispatch } from "react-redux";
+import UserOutlined from '@ant-design/icons/UserOutlined';
+import LockOutlined from '@ant-design/icons/LockOutlined';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+import { Form, Input, Button, Checkbox, Typography } from 'antd';
+import { loginUser } from '../../../_actions/user_actions';
 
 const { Title } = Typography;
 
 function LoginPage(props) {
   const dispatch = useDispatch();
-  const rememberMeChecked = localStorage.getItem("rememberMe") ? true : false;
+  const rememberMeChecked = !!localStorage.getItem('rememberMe');
 
-  const [formErrorMessage, setFormErrorMessage] = useState("");
+  const [formErrorMessage, setFormErrorMessage] = useState('');
   const [rememberMe, setRememberMe] = useState(rememberMeChecked);
 
   const handleRememberMe = () => {
     setRememberMe(!rememberMe);
   };
 
-  const initialEmail = localStorage.getItem("rememberMe")
-    ? localStorage.getItem("rememberMe")
-    : "";
+  const initialEmail = localStorage.getItem('rememberMe')
+    ? localStorage.getItem('rememberMe')
+    : '';
 
   return (
     <Formik
       initialValues={{
         email: initialEmail,
-        password: "",
+        password: '',
       }}
       validationSchema={Yup.object().shape({
         email: Yup.string()
-          .email("Email is invalid")
-          .required("Email is required"),
+          .email('Email is invalid')
+          .required('Email is required'),
         password: Yup.string()
-          .min(6, "Password must be at least 6 characters")
-          .required("Password is required"),
+          .min(6, 'Password must be at least 6 characters')
+          .required('Password is required'),
       })}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
-          let dataToSubmit = {
+          const dataToSubmit = {
             email: values.email,
             password: values.password,
           };
@@ -48,47 +49,49 @@ function LoginPage(props) {
           dispatch(loginUser(dataToSubmit))
             .then((response) => {
               if (response.payload.loginSuccess) {
-                window.localStorage.setItem("userId", response.payload.userId);
+                window.localStorage.setItem('userId', response.payload.userId);
                 if (rememberMe === true) {
-                  window.localStorage.setItem("rememberMe", values.id);
+                  window.localStorage.setItem('rememberMe', values.id);
                 } else {
-                  localStorage.removeItem("rememberMe");
+                  localStorage.removeItem('rememberMe');
                 }
-                props.history.push("/");
+                props.history.push('/');
               } else {
-                setFormErrorMessage("Check out your Account or Password again");
+                setFormErrorMessage('Check out your Account or Password again');
               }
             })
-            .catch((err) => {
-              setFormErrorMessage("Check out your Account or Password again");
+            .catch(() => {
+              setFormErrorMessage('Check out your Account or Password again');
               setTimeout(() => {
-                setFormErrorMessage("");
+                setFormErrorMessage('');
               }, 3000);
             });
           setSubmitting(false);
         }, 500);
       }}
     >
-      {(props) => {
+      {(formikProps) => {
         const {
           values,
           touched,
           errors,
+          // eslint-disable-next-line no-unused-vars
           dirty,
           isSubmitting,
           handleChange,
           handleBlur,
           handleSubmit,
+          // eslint-disable-next-line no-unused-vars
           handleReset,
-        } = props;
+        } = formikProps;
         return (
           <div className="app">
             <Title level={2}>Log In</Title>
-            <form onSubmit={handleSubmit} style={{ width: "350px" }}>
+            <form onSubmit={handleSubmit} style={{ width: '350px' }}>
               <Form.Item required>
                 <Input
                   id="email"
-                  prefix={<UserOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
+                  prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                   placeholder="Enter your email"
                   type="email"
                   value={values.email}
@@ -96,8 +99,8 @@ function LoginPage(props) {
                   onBlur={handleBlur}
                   className={
                     errors.email && touched.email
-                      ? "text-input error"
-                      : "text-input"
+                      ? 'text-input error'
+                      : 'text-input'
                   }
                 />
                 {errors.email && touched.email && (
@@ -108,7 +111,7 @@ function LoginPage(props) {
               <Form.Item required>
                 <Input
                   id="password"
-                  prefix={<LockOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
+                  prefix={<LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                   placeholder="Enter your password"
                   type="password"
                   value={values.password}
@@ -116,8 +119,8 @@ function LoginPage(props) {
                   onBlur={handleBlur}
                   className={
                     errors.password && touched.password
-                      ? "text-input error"
-                      : "text-input"
+                      ? 'text-input error'
+                      : 'text-input'
                   }
                 />
                 {errors.password && touched.password && (
@@ -126,14 +129,15 @@ function LoginPage(props) {
               </Form.Item>
 
               {formErrorMessage && (
+                // eslint-disable-next-line jsx-a11y/label-has-associated-control
                 <label>
                   <p
                     style={{
-                      color: "#ff0000bf",
-                      fontSize: "0.7rem",
-                      border: "1px solid",
-                      padding: "1rem",
-                      borderRadius: "10px",
+                      color: '#ff0000bf',
+                      fontSize: '0.7rem',
+                      border: '1px solid',
+                      padding: '1rem',
+                      borderRadius: '10px',
                     }}
                   >
                     {formErrorMessage}
@@ -152,7 +156,7 @@ function LoginPage(props) {
                 <a
                   className="login-form-forgot"
                   href="/reset_user"
-                  style={{ float: "right" }}
+                  style={{ float: 'right' }}
                 >
                   forgot password
                 </a>
@@ -161,7 +165,7 @@ function LoginPage(props) {
                     type="primary"
                     htmlType="submit"
                     className="login-form-button"
-                    style={{ minWidth: "100%" }}
+                    style={{ minWidth: '100%' }}
                     disabled={isSubmitting}
                     onSubmit={handleSubmit}
                   >

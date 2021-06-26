@@ -31,8 +31,8 @@
 
 - client/components/config.js 상수추가
   ```js
-  export const API_URL = "https://api.themoviedb.org/3";
-  export const IMAGE_BASE_URL = "http://image.tmdb.org/t/p/";
+  export const API_URL = 'https://api.themoviedb.org/3';
+  export const IMAGE_BASE_URL = 'http://image.tmdb.org/t/p/';
   ```
 
 npm 이슈.
@@ -64,7 +64,7 @@ npm 이슈.
    > Hooks가 제공하는 내장 API
 
    ```js
-   import { useState } from "react";
+   import { useState } from 'react';
 
    const Example = () => {
      const [count, setCount] = useState(0);
@@ -107,7 +107,7 @@ npm 이슈.
    - 두 번째 파라미터인 inputs를 통해 특정한 상태가 update 되었을 때만 effect가 실행되도록 설정할 수 있다
 
    ```js
-   import { useState, useEffect } from "react";
+   import { useState, useEffect } from 'react';
 
    export function Data() {
      const [data, setData] = useState(null);
@@ -120,7 +120,7 @@ npm 이슈.
 
      const isLoading = data == null;
      if (isLoading) {
-       return "Loading..";
+       return 'Loading..';
      }
      return data;
    }
@@ -134,9 +134,9 @@ npm 이슈.
 
    ```js
    useEffect(() => {
-     window.addEventListener("mousemove", logMousePosition);
+     window.addEventListener('mousemove', logMousePosition);
      return () => {
-       window.removeEventListener("mousemove", logMousePosition);
+       window.removeEventListener('mousemove', logMousePosition);
      };
    }, []);
    ```
@@ -156,7 +156,7 @@ npm 이슈.
    > ES7 React/Redux/GraphQL/React-Native snippets 설치 > rfce 단축키 입력하면 아래와 같이 템플릿화 된 코드가 자동 완성된다.
 
 ```js
-import React from "react";
+import React from 'react';
 
 function GridCards() {
   return <div></div>;
@@ -169,3 +169,23 @@ export default GridCards;
 
 - React의 일반적인 패턴은 컴포넌트가 여러개의 요소를 반환하는 것입니다. Fragments를 사용하면 DOM에 별도 노드를 추가하지 않고 자식 목록을 그룹화할 수 있습니다.
   [참고 링크](https://reactjs-kr.firebaseapp.com/docs/fragments.html#short-syntax)
+
+### 8강
+
+1. 영화출연진들 가져오기 기능추가
+
+- GridCard component 재활용
+  - landingpage에 따른 if 분기로 화면 나눔
+  - props에 따라 if로 새로그리는데 이게 좋은 방법일까?
+    - 클린코드 관점에서 하나의 기능에 집중하지 못하는데 차라리 분리하는게 낫지않을까?
+    - 이 강의는 클론코딩으로 구현하는것 자체에 초점이 맞춰져 있으므로 강의가 끝난 이후 리팩토링을 고민해보자.
+
+2. 토글버튼에 이벤트를 주어 출연진 카드 토글
+
+- useState로 토글상태를 관리하여 클릭시 반전시킨다.
+
+  ```js
+  const toggleActocView = () => {
+    setActorToggle(!ActorToggle);
+  };
+  ```

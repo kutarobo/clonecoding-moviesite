@@ -6,34 +6,23 @@ import MainImage from './Sections/MainImage';
 import GridCards from '../commons/GridCards';
 
 function LandingPage() {
-  // fixme react에서 제공하는 useState를 이용하여 state 지정 useState 공부하자.
   const [Movies, setMovies] = useState([]);
   const [MainMovieImage, setMainMovieImage] = useState(null);
-  const [CurrentPage, setCurrentPage] = useState(0);
+  const [page, setPage] = useState(1);
 
-  const fetchMovies = (endpoint) => {
-    fetch(endpoint)
-      .then((response) => response.json())
-      .then((response) => {
-        // console.log(response.results);
-        setMovies([...Movies, ...response.results]);
-        setMainMovieImage(response.results[0]);
-        setCurrentPage(response.page);
-      });
+  const loadMoreItems = () => {
+    setPage((prevPage) => prevPage + 1);
   };
 
   useEffect(() => {
-    const endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
-    fetchMovies(endpoint);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const loadMoreItems = () => {
-    const endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=${
-      CurrentPage + 1
-    }`;
-    fetchMovies(endpoint);
-  };
+    const endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=${page}`;
+    fetch(endpoint)
+      .then((response) => response.json())
+      .then((response) => {
+        setMovies((prevMovies) => [...prevMovies, ...response.results]);
+        setMainMovieImage(response.results[0]);
+      });
+  }, [page]);
 
   return (
     <div style={{ width: '100%', margin: '0' }}>

@@ -17,21 +17,18 @@ function MovieDetail(props) {
     const endpointCrew = `${API_URL}movie/${movieId}/credits?api_key=${API_KEY}`;
     const endpointInfo = `${API_URL}movie/${movieId}?api_key=${API_KEY}`;
 
-    console.log(props.match);
     fetch(endpointInfo)
       .then((response) => response.json())
       .then((response) => {
-        console.log(response);
         setMovie(response);
       });
 
     fetch(endpointCrew)
       .then((response) => response.json())
       .then((response) => {
-        console.log(response);
         setCasts(response.cast);
       });
-  }, []);
+  }, [movieId]);
 
   const toggleActocView = () => {
     setActorToggle(!ActorToggle);
@@ -39,11 +36,13 @@ function MovieDetail(props) {
   return (
     <div>
       {/* Header */}
-      <MainImage
-        image={`${IMAGE_BASE_URL}w1280${Movie.backdrop_path}`}
-        title={Movie.original_title}
-        text={Movie.overview}
-      />
+      {Movie && Movie.backdrop_path && (
+        <MainImage
+          image={`${IMAGE_BASE_URL}w1280${Movie.backdrop_path}`}
+          title={Movie.original_title}
+          text={Movie.overview}
+        />
+      )}
 
       {/* Body */}
       <div style={{ width: '85%', margin: '1rem auto' }}>

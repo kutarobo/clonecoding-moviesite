@@ -47,3 +47,34 @@
      const moviePost = movieInfo.backdrop_path;
      const movieRunTime = movieInfo.runTime;
      ```
+
+### 10강
+
+1. favorite 서버설정
+
+- routes 추가
+
+  - `server/routes/추가할라우트파일.js`
+
+  ```js
+  // express의 router 사용
+  const express = require('express');
+  const router = express.Router();
+  ...
+
+  ...
+  ```
+
+- index에 routes 연결
+
+  - server/index.js
+
+  ```js
+  app.use('/api/favorite', require('./routes/favorite')); // routes 경로를 매칭시켜준다
+  ```
+
+  - 이때 위 코드에서 경로를 매핑했기때문에 아래 코드의 api call을 할때에는 `'/api/favorite'`는 생략이 가능해졌다.
+
+  ```js
+  router.post('/favoriteNumber', (req, res) => {
+  ```

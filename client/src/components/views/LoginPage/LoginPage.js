@@ -49,7 +49,7 @@ function LoginPage(props) {
           dispatch(loginUser(dataToSubmit))
             .then((response) => {
               if (response.payload.loginSuccess) {
-                window.localStorage.setItem('userId', response.payload.userId);
+                window.localStorage.setItem('userId', response.payload.userId); // 로컬스토리지에 임의로 아이디를 박아둠
                 if (rememberMe === true) {
                   window.localStorage.setItem('rememberMe', values.id);
                 } else {

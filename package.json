@@ -57,7 +57,8 @@
       "react/jsx-one-expression-per-line": 0,
       "no-unused-vars": 1,
       "no-console": "off",
-      "react/prop-types": 0
+      "react/prop-types": 0,
+      "no-alert": 0
     },
     "env": {
       "browser": true

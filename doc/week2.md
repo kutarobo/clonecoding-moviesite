@@ -24,30 +24,6 @@
    const Favorite = mongoose.model('Favorite', favoriteSchema);
    ```
 
-   // todo mongoose schema 관련내용 찾아보자
-
-2. react/destructuring-assignment 관련 내용 수정 [참고링크](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/destructuring-assignment.md)
-
-   - 기존코드
-
-     ```js
-     const movieId = props.movieId; // movieInfo 를 여기서 미리할당
-     const userFrom = props.userFrom;
-     // fixme 아래 코드들이 해당 린트에 걸린다.
-     const movieTitle = props.movieInfo.title;
-     const moviePost = props.movieInfo.backdrop_path;
-     const movieRunTime = props.movieInfo.runTime;
-     ```
-
-   - 수정된 코드
-
-     ```js
-     const { movieId, userFrom, movieInfo } = props; // movieInfo 를 여기서 미리할당 받아서 lint를 통과시킨다.
-     const movieTitle = movieInfo.title;
-     const moviePost = movieInfo.backdrop_path;
-     const movieRunTime = movieInfo.runTime;
-     ```
-
 ### 10강
 
 1. favorite 서버설정
@@ -60,8 +36,6 @@
   // express의 router 사용
   const express = require('express');
   const router = express.Router();
-  ...
-
   ...
   ```
 
@@ -83,11 +57,7 @@
 
 ### 12 강
 
-### 13강
-
-1. 상단 메뉴 그리기
-
-- client/src/components/views/NavBar/Sections/LeftMenu.js
+### 13 강
 
 ### todo
 
@@ -164,7 +134,31 @@ module.exports = router; // router 로 모듈생성
     - template 엔진을 랜더링 할 때 사용한다.
     - views 폴더 pug 확장자를 가진 파일들이 템플릿 엔진이다
 
-3. 기능 개선
+3. 기능 개선 및 리팩토링
+
+- 9강
+
+  - react/destructuring-assignment 관련 내용 수정 [참고링크](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/destructuring-assignment.md)
+
+    - 기존코드
+
+    ```js
+    const movieId = props.movieId; // movieInfo 를 여기서 미리할당
+    const userFrom = props.userFrom;
+    // fixme 아래 코드들이 해당 린트에 걸린다.
+    const movieTitle = props.movieInfo.title;
+    const moviePost = props.movieInfo.backdrop_path;
+    const movieRunTime = props.movieInfo.runTime;
+    ```
+
+    - 수정된 코드
+
+    ```js
+    const { movieId, userFrom, movieInfo } = props; // movieInfo 를 여기서 미리할당 받아서 lint를 통과시킨다.
+    const movieTitle = movieInfo.title;
+    const moviePost = movieInfo.backdrop_path;
+    const movieRunTime = movieInfo.runTime;
+    ```
 
 - 14강
 

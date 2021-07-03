@@ -36,7 +36,7 @@
      // fixme 아래 코드들이 해당 린트에 걸린다.
      const movieTitle = props.movieInfo.title;
      const moviePost = props.movieInfo.backdrop_path;
-     const movieRunTime = props.movieInfo.runTime;
+     const movieRunTime = props.movieInfo.runtime;
      ```
 
    - 수정된 코드
@@ -45,7 +45,7 @@
      const { movieId, userFrom, movieInfo } = props; // movieInfo 를 여기서 미리할당 받아서 lint를 통과시킨다.
      const movieTitle = movieInfo.title;
      const moviePost = movieInfo.backdrop_path;
-     const movieRunTime = movieInfo.runTime;
+     const movieRunTime = movieInfo.runtime;
      ```
 
 ### 10강

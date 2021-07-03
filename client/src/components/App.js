@@ -26,7 +26,7 @@ function App() {
           <Route
             exact
             path="/movie/:movieId"
-            component={Auth(MovieDetail, null)}
+            component={Auth(MovieDetail, null)} // null 일경우 아무나 접근 가능해짐
           />
           <Route exact path="/favorite" component={Auth(FavoritePage, null)} />
         </Switch>

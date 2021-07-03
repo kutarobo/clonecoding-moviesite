@@ -36,7 +36,7 @@
      // fixme 아래 코드들이 해당 린트에 걸린다.
      const movieTitle = props.movieInfo.title;
      const moviePost = props.movieInfo.backdrop_path;
-     const movieRunTime = props.movieInfo.runtime;
+     const movieRunTime = props.movieInfo.runTime;
      ```
 
    - 수정된 코드
@@ -45,7 +45,7 @@
      const { movieId, userFrom, movieInfo } = props; // movieInfo 를 여기서 미리할당 받아서 lint를 통과시킨다.
      const movieTitle = movieInfo.title;
      const moviePost = movieInfo.backdrop_path;
-     const movieRunTime = movieInfo.runtime;
+     const movieRunTime = movieInfo.runTime;
      ```
 
 ### 10강
@@ -78,3 +78,32 @@
   ```js
   router.post('/favoriteNumber', (req, res) => {
   ```
+
+### 11 강
+
+특별한 것 없음
+
+### 12 강
+
+1. todo
+
+- favorite 버그
+  - 강사가 만든 버튼은 페이지 로딩시 실제값을 가져오는 부분이 누락되어있다.
+    - axios get 으로 정보 가져와서 버튼에 세팅하기.
+
+### 13강
+
+1. 상단 메뉴 그리기
+
+- client/src/components/views/NavBar/Sections/LeftMenu.js
+
+### todo
+
+1. mongoos model schema
+2. routes 공부
+3. 기능 개선
+
+- 12강
+  - favorite 버그
+  - 강사가 만든 버튼은 페이지 로딩시 실제값을 가져오는 부분이 누락되어있다.
+    - axios get 으로 정보 가져와서 버튼에 세팅하기.

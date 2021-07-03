@@ -28,13 +28,18 @@ function FavoritePage() {
       movieId,
       userFrom,
     };
+
     Axios.post('/api/favorite/removeFromFavorite', variables).then(
       (response) => {
-        if (response.data.success) {
-          fetchFavoritedMovie();
+        if (!response.data.success) {
+          alert('리스트에서 지우는데 실패했습니다.');
           return;
         }
-        alert('리스트에서 지우는데 실패했습니다.');
+        setFavorites((prevFavorites) =>
+          prevFavorites.filter(
+            (favorite) => favorite.movieId !== variables.movieId,
+          ),
+        );
       },
     );
   };

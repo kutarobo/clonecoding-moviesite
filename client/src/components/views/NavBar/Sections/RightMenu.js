@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Menu } from 'antd';
+import { Menu, Button } from 'antd';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import { USER_SERVER } from '../../../Config';
@@ -35,10 +35,11 @@ function RightMenu(props) {
   }
   return (
     <Menu mode={mode}>
+      <Menu.Item key="userInfo">
+        <a href="/userInfo">UserInfo</a>
+      </Menu.Item>
       <Menu.Item key="logout">
-        <button type="button" onClick={logoutHandler}>
-          Logout
-        </button>
+        <Button onClick={logoutHandler}>Logout</Button>
       </Menu.Item>
     </Menu>
   );

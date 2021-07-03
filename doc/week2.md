@@ -78,3 +78,32 @@
   ```js
   router.post('/favoriteNumber', (req, res) => {
   ```
+
+### 11 강
+
+특별한 것 없음
+
+### 12 강
+
+1. todo
+
+- favorite 버그
+  - 강사가 만든 버튼은 페이지 로딩시 실제값을 가져오는 부분이 누락되어있다.
+    - axios get 으로 정보 가져와서 버튼에 세팅하기.
+
+### 13강
+
+1. 상단 메뉴 그리기
+
+- client/src/components/views/NavBar/Sections/LeftMenu.js
+
+### todo
+
+1. mongoos model schema
+2. routes 공부
+3. 기능 개선
+
+- 12강
+  - favorite 버그
+  - 강사가 만든 버튼은 페이지 로딩시 실제값을 가져오는 부분이 누락되어있다.
+    - axios get 으로 정보 가져와서 버튼에 세팅하기.

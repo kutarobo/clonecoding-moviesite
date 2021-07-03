@@ -9,7 +9,7 @@ function Favorite(props) {
   const { movieId, userFrom, movieInfo } = props; // movieInfo 를 여기서 미리할당 받아서 lint를 통과시킨다.
   const movieTitle = movieInfo.title;
   const moviePost = movieInfo.backdrop_path;
-  const movieRunTime = movieInfo.runTime;
+  const movieRunTime = movieInfo.runtime;
 
   const [FavoriteNumber, setFavoriteNumber] = useState(0);
   const [Favorited, setFavorited] = useState(false);

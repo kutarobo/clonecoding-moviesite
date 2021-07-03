@@ -81,15 +81,7 @@
 
 ### 11 강
 
-특별한 것 없음
-
 ### 12 강
-
-1. todo
-
-- favorite 버그
-  - 강사가 만든 버튼은 페이지 로딩시 실제값을 가져오는 부분이 누락되어있다.
-    - axios get 으로 정보 가져와서 버튼에 세팅하기.
 
 ### 13강
 
@@ -99,16 +91,88 @@
 
 ### todo
 
-1. mongoos model schema
-2. routes 공부
+1. mongoos
+
+- [쿼리 사용법](https://mongoosejs.com/docs/queries.html)
+-
+
+2. express 와 route
+
+```js
+// server index.js
+const express = require('express');
+const app = express();
+
+app.use('/api/favorite', require('./routes/favorite')); // routes 경로를 매칭시켜준다
+```
+
+- express 기능.
+- use 이외에 http 메서드인 get, post, put, patch, delete 도 사용하능.
+  - 단 http 메서드를 사용할 경우 주소 이외에 http 메서드 까지 일치하는 요청일 경우 매핑된다.
+    - ex) `app.post('/api/favorite', ....)` 일경우 주소가 `/api/favorite` 이면서 `post` 요청일 경우에만 매칭이 된다.
+
+```js
+// 위 express 에서 매핑된 server routes/favorite 파일
+const express = require('express');
+const router = express.Router();
+
+router.post('/favorited', (req, res) => {
+  // blabla
+});
+
+module.exports = router; // router 로 모듈생성
+```
+
+- router 객체는 express.Router()로 만들어짐
+- router에도 app처럼 use, get, post, put, patch, delete 같은 메서드를 붙일 수 있다.
+- use를 제외하고 각 http 메서드와 상응한다
+- `app.use` 와 마찬가지로 하나의 `router` 에 여러개의 미들웨어를 장착할 수 있다.
+  ```js
+  router.get('/', middleware1, middleware2, middleware3);
+  ```
+- 특수 패턴
+
+  ```js
+  router.get('/users/:id', function (req, res) {
+    console.log(req.params, req.query);
+  });
+  ```
+
+  - `'/users/:id'` - :id 부분은 실제 url에서 `/users/`뒤에 오는 값을 치환한 값을 파마리터로 갖는다.
+  - 예를들어 `/users/123` 일 경우 req.params.id 로 값 123을 조회할 수 있다.
+  - `/users/123?limit=5&skip=10` 일경우 req.query 로 querystring을 읽어온다.
+    - req.query {limut:'5', skip: '10'}
+  - 패턴은 와일드 카드처럼 이용되기 때문에 일반 라우터를 방해하지않기 위해 더 나중에 위치시킨다.
+
+- 자주사용하는 응답메서드
+
+  - send
+
+    - 버퍼 데이터나 문자열을 전송하거나,
+    - HTML 코드를 전송하기도 하고,
+    - JSON데이터도 전송할 수 있다.
+
+  - sendFile
+
+    - 파일전송
+
+  - json
+    - json 데이터를 전송
+  - redirect
+    - `res.redirect(주소)` 와 같은 방식으로 사용하고 다른 라우터로 응답을 보낸다
+  - render
+    - template 엔진을 랜더링 할 때 사용한다.
+    - views 폴더 pug 확장자를 가진 파일들이 템플릿 엔진이다
+
 3. 기능 개선
 
-- 12강
-
-  - favorite 버그
-  - 강사가 만든 버튼은 페이지 로딩시 실제값을 가져오는 부분이 누락되어있다.
-    - axios get 으로 정보 가져와서 버튼에 세팅하기.
-
 - 14강
-  - remove 버튼 클릭시 리플레시가 아니라 state를 건드려서 삭제시키자.
-    - Favorite 에서 movieId를 비교해서 pop 시키는 방법을 고민해보자.
+
+  - [x] remove 버튼 클릭시 리플레시가 아니라 state를 건드려서 삭제시키자.
+        [깃헙 링크](https://github.com/kutarobo/clonecoding-moviesite/pull/15/commits/6eec8b59cfb3a46e88c6465fb40578d8e22b3866)
+
+4. 복습
+
+- 유저페이지 만들어보기
+  - 이름과 메일주소가져와서 뿌리기.
+    [깃헙링크](https://github.com/kutarobo/clonecoding-moviesite/pull/15/commits/768eaaefb40145a60301f38fdc4d937ffd0f5720)

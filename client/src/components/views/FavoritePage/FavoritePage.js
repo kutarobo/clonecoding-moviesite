@@ -3,7 +3,6 @@ import Axios from 'axios';
 import './favorite.css';
 import { Button, Popover } from 'antd';
 import { IMAGE_BASE_URL } from '../../Config';
-import Favorite from '../MovieDetail/Sections/Favorite';
 
 function FavoritePage() {
   const [Favorites, setFavorites] = useState([]);

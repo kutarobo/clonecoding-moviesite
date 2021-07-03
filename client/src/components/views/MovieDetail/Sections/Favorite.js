@@ -24,7 +24,6 @@ function Favorite(props) {
 
   useEffect(() => {
     Axios.post(API_FAVORITE_NUMBER, variables).then((response) => {
-      console.log(response.data);
       if (response.data.success) {
         setFavoriteNumber(response.data.favoriteNumber);
         return;
@@ -33,19 +32,12 @@ function Favorite(props) {
     });
 
     Axios.post(API_FAVORITED, variables).then((response) => {
-      console.log(response.data);
       if (response.data.success) {
         setFavorited(response.data.favorited);
         return;
       }
       alert('정보를 가져오는데 실패 했습니다.');
     });
-
-    // todo 강사가 만든 버젼은 새로고침시 실제데이터를 가져오지않는다. 페이지 로딩시 실제 값을 가져와서 상태값을 박아주는 기능을 만들자.
-    /*
-      useEffect에서  axios.get('') 이렇게 백서버에 Request를 보내
-      그 실제값을 다시 가져와서 넣어주시면 됩니다 ~!!^^  
-    */
   }, []);
 
   const toggleFavorite = () => {

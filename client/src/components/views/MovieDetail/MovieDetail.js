@@ -31,7 +31,7 @@ function MovieDetail(props) {
       });
   }, [movieId]);
 
-  const toggleActocView = () => {
+  const toggleActorView = () => {
     setActorToggle(!ActorToggle);
   };
   return (
@@ -62,7 +62,7 @@ function MovieDetail(props) {
         <div
           style={{ display: 'flex', justifyContent: 'center', margin: '2rem' }}
         >
-          <button type="button" onClick={toggleActocView}>
+          <button type="button" onClick={toggleActorView}>
             Toggle Actor View
           </button>
         </div>

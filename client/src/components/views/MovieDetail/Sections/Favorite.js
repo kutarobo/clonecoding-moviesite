@@ -6,6 +6,8 @@ function Favorite(props) {
   const API_FAVORITE = '/api/favorite';
   const API_FAVORITE_NUMBER = `${API_FAVORITE}/favoriteNumber`;
   const API_FAVORITED = `${API_FAVORITE}/favorited`;
+  const API_FAVORITE_REMOVE = `${API_FAVORITE}/removeFromFavorite`;
+  const API_FAVORITE_ADD = `${API_FAVORITE}/addToFavorite`;
   const { movieId, userFrom, movieInfo } = props; // movieInfo 를 여기서 미리할당 받아서 lint를 통과시킨다.
   const movieTitle = movieInfo.title;
   const moviePost = movieInfo.backdrop_path;
@@ -41,25 +43,15 @@ function Favorite(props) {
   }, []);
 
   const toggleFavorite = () => {
-    if (Favorited) {
-      Axios.post('/api/favorite/removeFromFavorite', variables).then(
-        (response) => {
-          if (response.data.success) {
-            setFavoriteNumber(FavoriteNumber - 1);
-            setFavorited(!Favorited);
-          } else {
-            alert('Favorite 리스트에서 지우는 걸 실패했습니다.');
-          }
-        },
-      );
-      return;
-    }
-    Axios.post('/api/favorite/AddToFavorite', variables).then((response) => {
+    const apiUrl = Favorited ? API_FAVORITE_REMOVE : API_FAVORITE_ADD;
+
+    Axios.post(apiUrl, variables).then((response) => {
       if (response.data.success) {
-        setFavoriteNumber(FavoriteNumber + 1);
+        const setNumber = Favorited ? FavoriteNumber - 1 : FavoriteNumber + 1;
+        setFavoriteNumber(setNumber);
         setFavorited(!Favorited);
       } else {
-        alert('Favorite 리스트에서 추가하는 걸 실패했습니다.');
+        alert(`Favorite ${Favorite ? '제거' : '추가'}에 실패했습니다.`);
       }
     });
   };

@@ -165,6 +165,9 @@ module.exports = router; // router 로 모듈생성
   - [x] remove 버튼 클릭시 리플레시가 아니라 state를 건드려서 삭제시키자.
         [깃헙 링크](https://github.com/kutarobo/clonecoding-moviesite/pull/15/commits/6eec8b59cfb3a46e88c6465fb40578d8e22b3866)
 
+- 중복 코드 제거
+  - [깃헙링크](https://github.com/kutarobo/clonecoding-moviesite/pull/16/files)
+
 4. 복습
 
 - 유저페이지 만들어보기
